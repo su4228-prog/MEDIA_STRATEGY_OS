@@ -15,6 +15,7 @@ from openai import (
 )
 
 from app.schemas.strategy import INSTRUCTIONS, STRATEGY_SCHEMA
+from app.services.ai_rate_limit import reserve, release
 from app.services.strategy_evidence import _program_index, build_evidence
 from app.services.strategy_report import (
     _local_fallback,
@@ -76,7 +77,7 @@ def strategy_preview(program_id: str):
 
 
 @router.post("/strategy/{program_id}")
-def generate_strategy(program_id: str):
+def generate_strategy(program_id: str, request: Request):
     """프로그램 ID로 수동 전략 생성을 수행하고 기존 보고서 응답 구조를 반환한다."""
     if os.getenv("MSOS_ENABLE_AI", "false").lower() != "true":
         raise HTTPException(
@@ -100,6 +101,7 @@ def generate_strategy(program_id: str):
         "주의 사항": evidence["limitations"],
         "실행 전 검증 필요": not evidence["execution_allowed"],
     }
+    reservation = reserve(request, program_id)
     try:
         client = OpenAI(api_key=key, timeout=65.0, max_retries=0)
         response = client.responses.create(
@@ -177,3 +179,5 @@ def generate_strategy(program_id: str):
             status_code=502,
             detail=f"OpenAI 요청이 실패했습니다. 응답 상태: {exc.status_code}",
         )
+    finally:
+        release(reservation)

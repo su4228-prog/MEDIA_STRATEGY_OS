@@ -1,0 +1,49 @@
+{
+  "release": "v11.22",
+  "sources": [
+    {
+      "file": "INPUTS/PROGRAM_17_SEARCH_CONTENT_MIX_v1121.csv",
+      "role": "17개 프로그램 검색/영상 유형 집계",
+      "status": "previous-analysis-derived"
+    },
+    {
+      "file": "INPUTS/PROGRAM_17_DECISION_POLICY_v1118.csv",
+      "role": "의사결정 정책·경고",
+      "status": "exploratory-policy"
+    },
+    {
+      "file": "INPUTS/17_PROGRAMS_INTERPRETABILITY_v1116.csv",
+      "role": "RACOI W41 원본값/시청률 결측 원칙, W40 잠정값",
+      "status": "mixed-observed-and-provisional"
+    },
+    {
+      "file": "INPUTS/VIDEO_303_EPISODE_LINK_AUDIT_v1120.csv",
+      "role": "303 영상 ID/업로드일/방송일 제목 근거",
+      "status": "candidate-and-date-audit"
+    },
+    {
+      "file": "INPUTS/V1119_OFFICIAL_EPISODE_MATCHES.csv",
+      "role": "20개 공식 방송일",
+      "status": "official-page-date-crossmatch"
+    },
+    {
+      "file": "INPUTS/EVIDENCE_LEDGER_ALL_USER_INPUT.csv",
+      "role": "70개 고유 영상의 78건 사용자 기록·정정 이력",
+      "status": "historical-human-input-not-independent-test"
+    },
+    {
+      "file": "INPUTS/QA_v1121.json",
+      "role": "이전 검증 기록",
+      "status": "immutable-record"
+    }
+  ],
+  "missing_data_policy": [
+    "RACOI W41 전체 0 시청률은 수치 null로 저장. 원본 0값은 소스 보존하며 이용 금지.",
+    "RACOI W40 잠정 가공값은 비교 검증 미완료 상태로 표시하고 확정 상승/하락 주장의 근거로 사용 금지.",
+    "유튜브 후보 0건을 미방영/공급 0건이라고 해석하지 않음.",
+    "방송일 단서 없는 영상은 방송일 null. 업로드일을 방송일로 대입 금지.",
+    "사람 확인 없는 영상 유형/프로그램 소속은 모델 후보로 구분.",
+    "검색 관심의 프로그램별 서로 다른 정규화 지수 절대 크기 비교 금지."
+  ],
+  "no_user_input_required": true
+}

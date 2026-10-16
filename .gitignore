@@ -45,3 +45,11 @@ frontend/public/programs/
 frontend/public/fonts/
 frontend/public/brand/
 frontend/src/assets/hero.png
+
+# 배포에 필요한 프로그램 분석 데이터
+!backend/data/
+!backend/data/programs_v1.json
+!backend/data/videos_v1.json
+!backend/data/episodes_v1.json
+!backend/data/provenance_v1.json
+!backend/data/field_dictionary_v1.json

@@ -1,0 +1,13 @@
+{
+  "program_id": "17개 프로그램 내부 식별자",
+  "naver.w40_to_w41_change_pct": "동일 검색어·동일 정규화 구간의 주간 7일 평균 변화율(%). 프로그램 간 검색 지수 절대 비교 불허",
+  "youtube.w40_owner_candidates": "공식 6채널 업로드 중 프로그램 소속 규칙으로 연결된 후보. 실제 전체 공급량 아님",
+  "youtube.type_mix": "영상 유형 v11.7 실험 분류. 독립 성능 미확립",
+  "racoi.w40_posts": "이전 가공본 잠정값. W41 원본과 신뢰도 다름",
+  "racoi.w41_posts": "원본 W41 게시글 관측값. 방송 성과 인과 지표 아님",
+  "racoi.w41_household_rating_pct": "null. 원본 0.0 전체행으로 유효 시청률 판단 불가. 실제 0% 아님",
+  "episode_date_evidence.crossmatched_video_count": "제목 방송일이 공식 방송일과 일치한 영상 후보 수. 회차 내용 검증 아님",
+  "confidence.overall": "EXPLORATORY_ONLY 고정. 숫자 신뢰도 스코어가 아님",
+  "decision.execution_allowed": "False 고정. 실제 편성/예산 결정 자동 실행 금지",
+  "source provenance": "결측을 0으로 바꾸지 않고 필드별 출처·제한을 보존"
+}

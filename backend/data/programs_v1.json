@@ -1,0 +1,1628 @@
+{
+  "meta": {
+    "dataset_id": "media-strategy-os-w40-w41-final-analysis",
+    "contract_version": "1.0.0",
+    "analysis_release": "v11.22",
+    "date_frozen": "2026-10-15",
+    "analysis_status": "CLOSED_WITH_LIMITATIONS",
+    "operational_classifier_baseline": "v11.3",
+    "rejected_classifier": "v11.6",
+    "experimental_classifiers": [
+      "v11.7",
+      "v11.13"
+    ],
+    "weeks": {
+      "W40": {
+        "from": "2026-09-28",
+        "through": "2026-10-04",
+        "timezone": "Asia/Seoul"
+      },
+      "W41": {
+        "from": "2026-10-05",
+        "through": "2026-10-11",
+        "timezone": "Asia/Seoul"
+      }
+    },
+    "scope": {
+      "programs": 17,
+      "youtube_all_collected_videos": 2102,
+      "youtube_attributed_candidates": 303,
+      "six_official_channels": 6,
+      "official_dates": 20,
+      "date_crossmatched_video_candidates": 129,
+      "human_gold_unique_video_ids": 70
+    },
+    "version_policy": "분류 모델의 배포 성능 독립 검증 미완료; 자료는 탐색 분석 및 사이트 프로토타입용",
+    "prohibited_claims": [
+      "independent classifier accuracy",
+      "causal content effect",
+      "cross-program Naver raw-index rank",
+      "zero RACOI rating means 0% audience",
+      "program candidate uploads equals all uploads",
+      "unlinked video means no broadcast"
+    ]
+  },
+  "programs": [
+    {
+      "program_id": "MBN01",
+      "program_name": "김주하의 데이앤나잇",
+      "decision": {
+        "category": "HOLD",
+        "label": "판단 보류",
+        "priority": 5,
+        "interpretation": "검색 변화 +3.2%, 유튜브 후보 -2건으로 현재 자료만으로 우선 개입 방향 설정 불가.",
+        "safe_next_check": "현재 근거만으로 전략 실행하지 않고 관측값과 미확인 요인만 기록",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 30.24468857,
+        "w41_index_mean": 31.21626143,
+        "w40_to_w41_change_pct": 3.212,
+        "direction": "관심 보합(±5% 이내)",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 7,
+        "w41_owner_candidates": 5,
+        "change_count": -2,
+        "total_owner_candidates": 12,
+        "official_date_crossmatched_count": 3,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "제한적 표본 — 사례 설명만 가능",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 7,
+            "w41_count": 5,
+            "w40_share_pct": 100.0,
+            "w41_share_pct": 100.0
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 230,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 274,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 521,
+        "w41_video_views_thousand": 692,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2025.11.22"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 3,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "제한적 표본 — 사례 설명만 가능"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 변화 절대값 <5%: 운영상 보합 취급(통계적 유의성 아님) | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN02",
+      "program_name": "나는 자연인이다",
+      "decision": {
+        "category": "ATTENTION_SUPPLY_REVIEW",
+        "label": "관심·공급 변화 검토",
+        "priority": 1,
+        "interpretation": "검색 관심 +31.2%와 소속 후보 -1건의 반대 방향을 검토할 가치가 있음. 공급 확대가 필요하다는 증거는 아님.",
+        "safe_next_check": "실제 방송 편성과 클립·재업로드 구성을 확인한 뒤, 관심 증가와 업로드 후보 감소가 반복되는지 비교",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 42.06563143,
+        "w41_index_mean": 55.20269857,
+        "w40_to_w41_change_pct": 31.23,
+        "direction": "관심 증가",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 4,
+        "w41_owner_candidates": 3,
+        "change_count": -1,
+        "total_owner_candidates": 7,
+        "official_date_crossmatched_count": 6,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 4,
+            "w41_count": 3,
+            "w40_share_pct": 100.0,
+            "w41_share_pct": 100.0
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 48,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 226,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 827,
+        "w41_video_views_thousand": 1271,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2021.08.22"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 6,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼"
+      },
+      "limitations": "유튜브 후보가 주당 4건 이하인 주차 포함: 1건 변동 민감 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN03",
+      "program_name": "나의 해방일지",
+      "decision": {
+        "category": "WATCH",
+        "label": "추가 관찰",
+        "priority": 4,
+        "interpretation": "네이버 동일 검색어의 주차 변화가 +71.2%로 관측됨. 2주만으로 추세 또는 원인 판단 불가.",
+        "safe_next_check": "추가 기간이 확보되면 같은 검색어로 재측정하고 방송 회차 요인을 분리",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 33.35651286,
+        "w41_index_mean": 57.10807714,
+        "w40_to_w41_change_pct": 71.205,
+        "direction": "관심 증가",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 4,
+        "w41_owner_candidates": 4,
+        "change_count": 0,
+        "total_owner_candidates": 8,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 4,
+            "w41_count": 4,
+            "w40_share_pct": 100.0,
+            "w41_share_pct": 100.0
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 23,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 16,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 8,
+        "w41_video_views_thousand": 39,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2025.10.15"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼"
+      },
+      "limitations": "유튜브 후보가 주당 4건 이하인 주차 포함: 1건 변동 민감 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN04",
+      "program_name": "디스이즈 현무로드",
+      "decision": {
+        "category": "CONTENT_MIX_REVIEW",
+        "label": "영상 구성·편성 검토",
+        "priority": 2,
+        "interpretation": "유튜브 후보 15→21건으로 변했으나 방송 주기와 클립 구성 미연결. 업로드 증가·감소의 효과는 미확인.",
+        "safe_next_check": "증감 폭이 큰 주의 업로드 영상을 유형·재업로드·방송 회차 기준으로 재집계",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 33.76651571,
+        "w41_index_mean": 33.52795,
+        "w40_to_w41_change_pct": -0.707,
+        "direction": "관심 보합(±5% 이내)",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 15,
+        "w41_owner_candidates": 21,
+        "change_count": 6,
+        "total_owner_candidates": 36,
+        "official_date_crossmatched_count": 10,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 14,
+            "w41_count": 20,
+            "w40_share_pct": 93.3,
+            "w41_share_pct": 95.2
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 1,
+            "w41_count": 1,
+            "w40_share_pct": 6.7,
+            "w41_share_pct": 4.8
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 206,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 104,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 186,
+        "w41_video_views_thousand": 139,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2026.09.20"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 10,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 변화 절대값 <5%: 운영상 보합 취급(통계적 유의성 아님) | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN05",
+      "program_name": "무너진 일상을 되찾는 시간 퀸메이커",
+      "decision": {
+        "category": "DATA_COVERAGE",
+        "label": "수집·귀속 확인",
+        "priority": 3,
+        "interpretation": "수집된 6개 채널에서 소속 후보는 두 주 모두 0건. 검색 관심 -41.4%와 실제 업로드 유무는 별개.",
+        "safe_next_check": "6개 공식 채널 수집 범위와 프로그램 별칭·시즌·태그 매칭 누락을 자동 점검",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 17.27822714,
+        "w41_index_mean": 10.12943143,
+        "w40_to_w41_change_pct": -41.375,
+        "direction": "관심 감소",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 0,
+        "w41_owner_candidates": 0,
+        "change_count": 0,
+        "total_owner_candidates": 0,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 36,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 10,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 36,
+        "w41_video_views_thousand": 62,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2026.09.27"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가"
+      },
+      "limitations": "유튜브 후보 0건은 실제 업로드 없음의 증거가 아님 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 검색어 동명이의 가능성 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN06",
+      "program_name": "바디인사이트",
+      "decision": {
+        "category": "ATTENTION_SUPPLY_REVIEW",
+        "label": "관심·공급 변화 검토",
+        "priority": 1,
+        "interpretation": "검색 관심 +16.3%와 소속 후보 -1건의 반대 방향을 검토할 가치가 있음. 공급 확대가 필요하다는 증거는 아님.",
+        "safe_next_check": "실제 방송 편성과 클립·재업로드 구성을 확인한 뒤, 관심 증가와 업로드 후보 감소가 반복되는지 비교",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 11.95689286,
+        "w41_index_mean": 13.90336571,
+        "w40_to_w41_change_pct": 16.279,
+        "direction": "관심 증가",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 9,
+        "w41_owner_candidates": 8,
+        "change_count": -1,
+        "total_owner_candidates": 17,
+        "official_date_crossmatched_count": 16,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "제한적 표본 — 사례 설명만 가능",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 9,
+            "w41_count": 7,
+            "w40_share_pct": 100.0,
+            "w41_share_pct": 87.5
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 1,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 12.5
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 10,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 50,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 64,
+        "w41_video_views_thousand": 28,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2025.10.13"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 16,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "제한적 표본 — 사례 설명만 가능"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN07",
+      "program_name": "빈칸 채우기",
+      "decision": {
+        "category": "WATCH",
+        "label": "추가 관찰",
+        "priority": 4,
+        "interpretation": "네이버 동일 검색어의 주차 변화가 -32.7%로 관측됨. 2주만으로 추세 또는 원인 판단 불가.",
+        "safe_next_check": "추가 기간이 확보되면 같은 검색어로 재측정하고 방송 회차 요인을 분리",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 8.56227857,
+        "w41_index_mean": 5.76498857,
+        "w40_to_w41_change_pct": -32.67,
+        "direction": "관심 감소",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 3,
+        "w41_owner_candidates": 2,
+        "change_count": -1,
+        "total_owner_candidates": 5,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 1,
+            "w41_count": 2,
+            "w40_share_pct": 33.3,
+            "w41_share_pct": 100.0
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 2,
+            "w41_count": 0,
+            "w40_share_pct": 66.7,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 10,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 9,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 13,
+        "w41_video_views_thousand": 52,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2026.09.14"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼"
+      },
+      "limitations": "유튜브 후보가 주당 4건 이하인 주차 포함: 1건 변동 민감 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN08",
+      "program_name": "속풀이쇼 동치미",
+      "decision": {
+        "category": "WATCH",
+        "label": "추가 관찰",
+        "priority": 4,
+        "interpretation": "네이버 동일 검색어의 주차 변화가 -16.7%로 관측됨. 2주만으로 추세 또는 원인 판단 불가.",
+        "safe_next_check": "추가 기간이 확보되면 같은 검색어로 재측정하고 방송 회차 요인을 분리",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 46.18032143,
+        "w41_index_mean": 38.44829429,
+        "w40_to_w41_change_pct": -16.743,
+        "direction": "관심 감소",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 2,
+        "w41_owner_candidates": 2,
+        "change_count": 0,
+        "total_owner_candidates": 4,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 2,
+            "w41_count": 2,
+            "w40_share_pct": 100.0,
+            "w41_share_pct": 100.0
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 346,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 263,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 393,
+        "w41_video_views_thousand": 110,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2012.11.17"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "소표본 — 1건 차이 영향 큼"
+      },
+      "limitations": "유튜브 후보가 주당 4건 이하인 주차 포함: 1건 변동 민감 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN09",
+      "program_name": "알토란",
+      "decision": {
+        "category": "DATA_COVERAGE",
+        "label": "수집·귀속 확인",
+        "priority": 3,
+        "interpretation": "수집된 6개 채널에서 소속 후보는 두 주 모두 0건. 검색 관심 +5.0%와 실제 업로드 유무는 별개.",
+        "safe_next_check": "6개 공식 채널 수집 범위와 프로그램 별칭·시즌·태그 매칭 누락을 자동 점검",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 30.47758429,
+        "w41_index_mean": 32.00669714,
+        "w40_to_w41_change_pct": 5.017,
+        "direction": "관심 증가",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 0,
+        "w41_owner_candidates": 0,
+        "change_count": 0,
+        "total_owner_candidates": 0,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 48,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 65,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 64,
+        "w41_video_views_thousand": 31,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2014.10.19"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가"
+      },
+      "limitations": "유튜브 후보 0건은 실제 업로드 없음의 증거가 아님 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN10",
+      "program_name": "엄지의 제왕",
+      "decision": {
+        "category": "DATA_COVERAGE",
+        "label": "수집·귀속 확인",
+        "priority": 3,
+        "interpretation": "수집된 6개 채널에서 소속 후보는 두 주 모두 0건. 검색 관심 -19.5%와 실제 업로드 유무는 별개.",
+        "safe_next_check": "6개 공식 채널 수집 범위와 프로그램 별칭·시즌·태그 매칭 누락을 자동 점검",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 20.40494429,
+        "w41_index_mean": 16.42294286,
+        "w40_to_w41_change_pct": -19.515,
+        "direction": "관심 감소",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 0,
+        "w41_owner_candidates": 0,
+        "change_count": 0,
+        "total_owner_candidates": 0,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 27,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 32,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 77,
+        "w41_video_views_thousand": 43,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2013.01.04"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가"
+      },
+      "limitations": "유튜브 후보 0건은 실제 업로드 없음의 증거가 아님 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN11",
+      "program_name": "전설의 사내",
+      "decision": {
+        "category": "CONTENT_MIX_REVIEW",
+        "label": "영상 구성·편성 검토",
+        "priority": 2,
+        "interpretation": "유튜브 후보 50→56건으로 변했으나 방송 주기와 클립 구성 미연결. 업로드 증가·감소의 효과는 미확인.",
+        "safe_next_check": "증감 폭이 큰 주의 업로드 영상을 유형·재업로드·방송 회차 기준으로 재집계",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 35.66557714,
+        "w41_index_mean": 36.13836286,
+        "w40_to_w41_change_pct": 1.326,
+        "direction": "관심 보합(±5% 이내)",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 50,
+        "w41_owner_candidates": 56,
+        "change_count": 6,
+        "total_owner_candidates": 106,
+        "official_date_crossmatched_count": 40,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 21,
+            "w41_count": 20,
+            "w40_share_pct": 42.0,
+            "w41_share_pct": 35.7
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 26,
+            "w41_count": 33,
+            "w40_share_pct": 52.0,
+            "w41_share_pct": 58.9
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 3,
+            "w41_count": 3,
+            "w40_share_pct": 6.0,
+            "w41_share_pct": 5.4
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 151,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 457,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 15413,
+        "w41_video_views_thousand": 2032,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2026.07.15"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 40,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 뮤직 무대와 프로그램 성격을 분리해야 함 | 네이버 변화 절대값 <5%: 운영상 보합 취급(통계적 유의성 아님) | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN12",
+      "program_name": "전현무계획4",
+      "decision": {
+        "category": "CONTENT_MIX_REVIEW",
+        "label": "영상 구성·편성 검토",
+        "priority": 2,
+        "interpretation": "유튜브 후보 18→13건으로 변했으나 방송 주기와 클립 구성 미연결. 업로드 증가·감소의 효과는 미확인.",
+        "safe_next_check": "증감 폭이 큰 주의 업로드 영상을 유형·재업로드·방송 회차 기준으로 재집계",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 39.32183571,
+        "w41_index_mean": 41.53902429,
+        "w40_to_w41_change_pct": 5.639,
+        "direction": "관심 증가",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 18,
+        "w41_owner_candidates": 13,
+        "change_count": -5,
+        "total_owner_candidates": 31,
+        "official_date_crossmatched_count": 17,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 17,
+            "w41_count": 11,
+            "w40_share_pct": 94.4,
+            "w41_share_pct": 84.6
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 1,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 7.7
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 1,
+            "w41_count": 1,
+            "w40_share_pct": 5.6,
+            "w41_share_pct": 7.7
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 810,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 760,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 1300,
+        "w41_video_views_thousand": 566,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2026.07.03"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 17,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 시즌 명칭을 프로그램 귀속과 구분 필요 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN13",
+      "program_name": "천기누설",
+      "decision": {
+        "category": "DATA_COVERAGE",
+        "label": "수집·귀속 확인",
+        "priority": 3,
+        "interpretation": "수집된 6개 채널에서 소속 후보는 두 주 모두 0건. 검색 관심 +18.7%와 실제 업로드 유무는 별개.",
+        "safe_next_check": "6개 공식 채널 수집 범위와 프로그램 별칭·시즌·태그 매칭 누락을 자동 점검",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 38.78536429,
+        "w41_index_mean": 46.03174143,
+        "w40_to_w41_change_pct": 18.683,
+        "direction": "관심 증가",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 0,
+        "w41_owner_candidates": 0,
+        "change_count": 0,
+        "total_owner_candidates": 0,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 5,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 9,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 47,
+        "w41_video_views_thousand": 23,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2012.05.19"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가"
+      },
+      "limitations": "유튜브 후보 0건은 실제 업로드 없음의 증거가 아님 | RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN14",
+      "program_name": "특종세상",
+      "decision": {
+        "category": "CONTENT_MIX_REVIEW",
+        "label": "영상 구성·편성 검토",
+        "priority": 2,
+        "interpretation": "유튜브 후보 23→13건으로 변했으나 방송 주기와 클립 구성 미연결. 업로드 증가·감소의 효과는 미확인.",
+        "safe_next_check": "증감 폭이 큰 주의 업로드 영상을 유형·재업로드·방송 회차 기준으로 재집계",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 34.92409571,
+        "w41_index_mean": 33.90517286,
+        "w40_to_w41_change_pct": -2.918,
+        "direction": "관심 보합(±5% 이내)",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 23,
+        "w41_owner_candidates": 13,
+        "change_count": -10,
+        "total_owner_candidates": 36,
+        "official_date_crossmatched_count": 12,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 19,
+            "w41_count": 11,
+            "w40_share_pct": 82.6,
+            "w41_share_pct": 84.6
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 4,
+            "w41_count": 2,
+            "w40_share_pct": 17.4,
+            "w41_share_pct": 15.4
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 241,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 139,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 1202,
+        "w41_video_views_thousand": 2023,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2012.03.09"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 12,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 과거 클립 재업로드가 후보 공급량에 섞였을 가능성 | 네이버 변화 절대값 <5%: 운영상 보합 취급(통계적 유의성 아님) | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN15",
+      "program_name": "판도라",
+      "decision": {
+        "category": "HOLD",
+        "label": "판단 보류",
+        "priority": 5,
+        "interpretation": "검색 변화 +2.8%, 유튜브 후보 -1건으로 현재 자료만으로 우선 개입 방향 설정 불가.",
+        "safe_next_check": "현재 근거만으로 전략 실행하지 않고 관측값과 미확인 요인만 기록",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 78.06205714,
+        "w41_index_mean": 80.23418857,
+        "w40_to_w41_change_pct": 2.783,
+        "direction": "관심 보합(±5% 이내)",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 12,
+        "w41_owner_candidates": 11,
+        "change_count": -1,
+        "total_owner_candidates": 23,
+        "official_date_crossmatched_count": 11,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 12,
+            "w41_count": 11,
+            "w40_share_pct": 100.0,
+            "w41_share_pct": 100.0
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 8,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 4,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 358,
+        "w41_video_views_thousand": 237,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2017.12.16"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 11,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "구성 기술 비교 가능 — 인과 검증 불가"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 변화 절대값 <5%: 운영상 보합 취급(통계적 유의성 아님) | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN16",
+      "program_name": "팩트로 지킨다 건강 히어로",
+      "decision": {
+        "category": "DATA_COVERAGE",
+        "label": "수집·귀속 확인",
+        "priority": 3,
+        "interpretation": "수집된 6개 채널에서 소속 후보는 두 주 모두 0건. 검색 관심 +68.3%와 실제 업로드 유무는 별개.",
+        "safe_next_check": "6개 공식 채널 수집 범위와 프로그램 별칭·시즌·태그 매칭 누락을 자동 점검",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 19.80952143,
+        "w41_index_mean": 33.33332857,
+        "w40_to_w41_change_pct": 68.269,
+        "direction": "관심 증가",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 0,
+        "w41_owner_candidates": 0,
+        "change_count": 0,
+        "total_owner_candidates": 0,
+        "official_date_crossmatched_count": 0,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": null,
+            "w41_share_pct": null
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": null,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 4,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 9,
+        "w41_video_views_thousand": 9,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2025.10.16"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 0,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "업로드 후보 없음 — 유형 비교 불가"
+      },
+      "limitations": "유튜브 후보 0건은 실제 업로드 없음의 증거가 아님 | RACOI W40 결방/미관측: 게시글 증감 계산 불가 | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    },
+    {
+      "program_id": "MBN17",
+      "program_name": "휴먼다큐 사노라면",
+      "decision": {
+        "category": "HOLD",
+        "label": "판단 보류",
+        "priority": 5,
+        "interpretation": "검색 변화 -1.8%, 유튜브 후보 +0건으로 현재 자료만으로 우선 개입 방향 설정 불가.",
+        "safe_next_check": "현재 근거만으로 전략 실행하지 않고 관측값과 미확인 요인만 기록",
+        "execution_allowed": false,
+        "causal_claim_allowed": false
+      },
+      "naver": {
+        "w40_index_mean": 28.67434714,
+        "w41_index_mean": 28.14943857,
+        "w40_to_w41_change_pct": -1.831,
+        "direction": "관심 보합(±5% 이내)",
+        "source_status": "OBSERVED_WITHIN_SAME_QUERY",
+        "comparison_scope": "ONLY_SAME_PROGRAM_TWO_WEEKS",
+        "days_per_week": 7
+      },
+      "youtube": {
+        "w40_owner_candidates": 9,
+        "w41_owner_candidates": 9,
+        "change_count": 0,
+        "total_owner_candidates": 18,
+        "official_date_crossmatched_count": 14,
+        "classification_source": "v11.3 program attribution; v11.7 experimental video-type labels",
+        "source_status": "MODEL_CANDIDATE_NOT_INDEPENDENTLY_VALIDATED",
+        "sample_gate": "제한적 표본 — 사례 설명만 가능",
+        "type_mix": {
+          "CLIP_CANDIDATE": {
+            "label": "일반 클립 후보",
+            "w40_count": 8,
+            "w41_count": 8,
+            "w40_share_pct": 88.9,
+            "w41_share_pct": 88.9
+          },
+          "MUSIC_STAGE": {
+            "label": "음악 무대 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "PROMO_PREVIEW": {
+            "label": "예고·미리보기 후보",
+            "w40_count": 1,
+            "w41_count": 1,
+            "w40_share_pct": 11.1,
+            "w41_share_pct": 11.1
+          },
+          "FULL_REPLAY_SPECIAL": {
+            "label": "다시보기·특집 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          },
+          "NEWS_REPORT": {
+            "label": "뉴스 후보",
+            "w40_count": 0,
+            "w41_count": 0,
+            "w40_share_pct": 0.0,
+            "w41_share_pct": 0.0
+          }
+        }
+      },
+      "racoi": {
+        "w40_posts": 19,
+        "w40_posts_status": "PRIOR_DERIVED_PROVISIONAL",
+        "w41_posts": 15,
+        "w41_posts_status": "W41_SOURCE_SHEET_OBSERVED",
+        "w41_comments": 299,
+        "w41_video_views_thousand": 825,
+        "w41_household_rating_pct": null,
+        "w41_household_rating_status": "RAW_ZERO_ALL_ROWS_INVALID_AS_VIEWERSHIP_EVIDENCE",
+        "w40_to_w41_posts_comparison_status": "PROVISIONAL_NOT_VERIFIED",
+        "racoi_program_start_date_not_episode": "2012.03.07"
+      },
+      "episode_date_evidence": {
+        "crossmatched_video_count": 14,
+        "evidence_status": "TITLE_AIR_DATE_MATCHES_OFFICIAL_DATE_ONLY"
+      },
+      "confidence": {
+        "overall": "EXPLORATORY_ONLY",
+        "program_owner_accuracy": "NOT_ESTABLISHED",
+        "content_type_accuracy": "NOT_ESTABLISHED",
+        "strategy_action": "NOT_APPROVED",
+        "sample_gate": "제한적 표본 — 사례 설명만 가능"
+      },
+      "limitations": "RACOI W40 게시글은 이전 가공값: W41 원본과 동급 신뢰도 아님 | 네이버 변화 절대값 <5%: 운영상 보합 취급(통계적 유의성 아님) | 네이버 동일 검색어 상대 변화만 가능; 프로그램 간 지수 절대 크기 비교 금지 | 유튜브 소속 후보 독립 정확도 미확립 | RACOI 시청률 0은 결측/미확인 취급"
+    }
+  ]
+}

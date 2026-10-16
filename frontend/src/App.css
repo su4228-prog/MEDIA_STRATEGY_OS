@@ -1,0 +1,2 @@
+/* 기존 CSS 경로 호환: 실제 스타일은 styles에서 관리합니다. */
+@import './styles/App.css';

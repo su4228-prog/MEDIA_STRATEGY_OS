@@ -1,0 +1,47 @@
+# Secrets: examples contain names only.
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# Local environments and generated artifacts
+.local/
+.venv/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+dist/
+build/
+coverage/
+*.egg-info/
+*.log
+logs/
+*.tmp
+*.temp
+*.bak
+*.backup
+_backup*/
+_BACKUP*/
+ai_router_backup.py
+ai_router_before_quality.py
+ai_router_original.py
+ai_router_previous.py
+
+# Local editor / OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Data remains local pending redistribution/privacy review.
+backend/data/*.json
+frontend/public/programs/
+frontend/public/fonts/
+frontend/public/brand/
+frontend/src/assets/hero.png

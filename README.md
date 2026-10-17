@@ -4,6 +4,8 @@
 
 네이버 검색 흐름 · RACOI 온라인 반응 · 유튜브 영상 후보를 한 화면에서 비교하고, **Python이 계산한 수치만 근거로** 프로그램별 콘텐츠 전략 검토안을 생성합니다. 지표마다 비교 범위와 검증 수준을 함께 표기해, 데이터 확인에서 전략 검토까지 이어지는 과정을 돕습니다.
 
+링크: https://media-strategy-os.vercel.app/?utm_source=chatgpt.com#/
+
 <p align="center">
   <img src="./docs/readme/demo/demo.gif" alt="배포 사이트 기능 시연 — 홈, 데이터 팝업, 화제성 분석, 프로그램 검색, 상세 리포트, AI 전략 리포트" width="100%" />
 </p>

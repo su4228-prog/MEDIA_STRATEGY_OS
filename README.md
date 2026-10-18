@@ -4,7 +4,7 @@
 
 네이버 검색 흐름 · RACOI 온라인 반응 · 유튜브 영상 후보를 한 화면에서 비교하고, **Python이 계산한 수치만 근거로** 프로그램별 콘텐츠 전략 검토안을 생성합니다. 지표마다 비교 범위와 검증 수준을 함께 표기해, 데이터 확인에서 전략 검토까지 이어지는 과정을 돕습니다.
 
-링크: https://media-strategy-os.vercel.app/?utm_source=chatgpt.com#/
+링크: https://media-strategy-os.vercel.app/
 
 <p align="center">
   <img src="./docs/readme/demo/demo.gif" alt="배포 사이트 기능 시연 — 홈, 데이터 팝업, 화제성 분석, 프로그램 검색, 상세 리포트, AI 전략 리포트" width="100%" />
@@ -188,19 +188,31 @@
 
 ---
 
+### 6. 첫 방문 데이터 연결 안정화
+
+Render 무료 서버가 절전에서 복구되는 동안 빈 데이터나 잘못된 프로그램 오류를 표시하지 않고, 초기 로딩 안내를 보여 줍니다. 6초 이상 지연되거나 재시도를 시작하면 연결 지연 안내로 바뀌며, 최종 실패 시 **다시 불러오기** 버튼으로 수동 재요청할 수 있습니다.
+
+- 자동 재시도는 무료 `GET /api/v1/programs`에만 적용합니다. 네트워크 오류·타임아웃·HTTP 408/425/429·5xx는 재시도하고, 404 등 명확한 요청 오류는 즉시 중단합니다.
+- 요청당 최대 **18초**, 전체 최대 **110초**, 최대 **8회**입니다. 대기 간격은 **2 → 4 → 8 → 16 → 24 → 24 → 24초**이며 남은 전체 시간에 따라 일찍 종료될 수 있습니다.
+- 성공하면 즉시 종료하고 목록을 교체해 중복 표시를 막습니다. 성공한 목록은 해시 경로 이동에도 재사용하며, 로딩 중 경로 변경·컴포넌트 해제 시 요청과 대기를 취소합니다.
+- 프로그램 상세 화면은 관련 영상 API를 추가 조회합니다. 회차 조회 API는 백엔드에서 제공하지만 현재 상세 화면이 별도로 호출하지는 않습니다.
+- **유료 AI 보고서 POST에는 자동 재시도를 적용하지 않습니다.** 이번 연결 안정화 작업은 기존 디자인·분석 데이터·AI 보고서 내용을 변경하지 않았습니다.
+
+---
+
 ## 🤖 AI 생성 파이프라인
 
 ```text
 ① 근거 계산         ② 사용량 예약          ③ 구조화 생성          ④ 응답 검증              ⑤ 보고서 반환
 build_evidence() → Redis Lua 원자 처리 → JSON Schema strict → 근거에 없는 수치 검사 → openai_validated
 주차 비교표          개인 3회·전체 30회/일    근거만 입력            실패 시 재호출 없이      또는 verified_evidence_fallback
-제목 단서·주의 사항  120초 중복 잠금         store=False           대체 보고서              + STRATEGY_REVIEW_ONLY
+제목 단서·주의 사항  최대 120초 중복 잠금    store=False           대체 보고서              + STRATEGY_REVIEW_ONLY
 ```
 
 | 보호 장치 | 내용 |
 |---|---|
 | **일일 한도** | 접속 환경(IP 해시)별 3회 · 사이트 전체 30회, UTC 자정 기준 초기화 |
-| **중복 잠금** | 같은 프로그램에 대한 동시 요청을 120초 동안 막음 |
+| **중복 잠금** | 같은 접속 환경(IP 해시)·같은 프로그램의 동시 요청을 차단. 최대 120초이며 요청 종료 시 자신의 잠금을 해제 |
 | **개인정보** | IP 원문은 저장하지 않고 `MSOS_RATE_LIMIT_SALT`로 HMAC-SHA256 해시만 보관 |
 | **보수적 차감** | 예약에 성공하면 이후 API 오류가 나도 횟수를 돌려주지 않음 (비용이 이미 발생했을 수 있음) |
 | **장애 시 차단** | Redis 설정이 없거나 통신이 실패하면 유료 호출을 진행하지 않고 503 반환 |
@@ -236,6 +248,7 @@ build_evidence() → Redis Lua 원자 처리 → JSON Schema strict → 근거�
 | **배포** | Vercel + Render 분리 | 단일 서버 배포 | 정적 파일은 CDN에서, API 키는 서버 환경 변수에만 둡니다. `/api/*` rewrite로 같은 출처처럼 호출합니다. |
 | **데이터 저장** | 버전 붙은 로컬 JSON | DB 구축 | 2주 스냅샷 분석이라 쓰기 요구가 없고, `_v1` 파일과 출처·필드 사전을 함께 관리하면 충분합니다. |
 | **차트** | SVG 직접 구현 | 차트 라이브러리 | 2주 비교 중심의 단순한 차트라 의존성 없이 브랜드 디자인을 그대로 맞출 수 있었습니다. |
+| **초기 데이터 연결** | 제한된 GET 재시도 + 로딩 안내 | 첫 실패 즉시 오류 / 무제한 재시도 | 절전 복구를 최대 110초 동안 기다리되 요청 수를 제한하고, 유료 AI POST는 재시도 대상에서 제외합니다. |
 
 ---
 
@@ -258,15 +271,21 @@ backend/
   requirements.txt · requirements-dev.txt · .env.example
 frontend/
   src/
-    App.jsx                 # 데이터 로딩·해시 라우팅
+    App.jsx                 # 데이터 상태·해시 경로에 따라 화면 연결
     pages/                  # Home, TrendPage, ProgramList, ProgramDetail
     components/             # Charts, Strategy, VideosSection, DataModal, Common
-    hooks/useRoute.js
-    utils/programData.js    # 표시·정렬·계산 기준
+      ProgramLoadState.jsx  # 초기·지연·실패 안내와 수동 재요청
+    hooks/
+      useRoute.js           # 기존 해시 라우팅
+      usePrograms.js        # 로딩 상태·성공 데이터 재사용·요청 정리
+    utils/
+      programData.js        # 표시·정렬·계산 기준
+      loadPrograms.js       # 무료 프로그램 GET 전용 제한 재시도
     styles/                 # 원래 선언 순서를 유지한 CSS
     programImages.js        # 프로그램 ID ↔ 포스터 매핑
   public/                   # programs(포스터), fonts, brand
   vercel.json               # /api rewrite
+  tests/loadPrograms.test.js # 네트워크·타임아웃·취소·복구 모의 검사
 deploy/vercel.example.json  # rewrite 예시
 scripts/                    # 리팩터링 전후 회귀 검증
 docs/
@@ -357,7 +376,9 @@ curl http://127.0.0.1:5173/api/v1/ai/strategy-preview/MBN11   # 무료 미리보
 
 ## ✅ 검증 결과
 
-1,106줄이던 `App.jsx`를 페이지·컴포넌트 단위로 분리(39줄)하면서, 화면과 응답이 바뀌지 않았는지 원본과 비교했습니다.
+### 리팩터링 당시 기록 — 2026.10.17
+
+1,106줄이던 `App.jsx`를 페이지·컴포넌트 단위로 분리(당시 39줄)하면서, 화면과 응답이 바뀌지 않았는지 원본과 비교했습니다. 아래 수치는 **당시 소스에 대한 검증 기록**이며 이후 변경된 코드가 원본과 완전히 동일하다는 의미는 아닙니다.
 
 | 검사 | 결과 |
 |---|---|
@@ -369,21 +390,32 @@ curl http://127.0.0.1:5173/api/v1/ai/strategy-preview/MBN11   # 무료 미리보
 | 페이지·상세·팝업·AI 보고서 HTML 비교 | 41개 일치 |
 | 데이터·이미지·폰트 SHA-256 | 51개 동일 |
 | ESLint · Vite 프로덕션 빌드 | 통과 |
-| 검증 중 실제 OpenAI 호출 | 0회 (모의 처리) |
+| 리팩터링 자동 검증 중 실제 OpenAI 호출 | 0회 (모의 처리) |
+
+### 초기 데이터 연결 개선 — 2026.10.18
+
+데이터 조회를 `usePrograms` 훅으로 옮긴 현재 `App.jsx`는 **29줄**입니다.
+
+| 검사 | 결과 |
+|---|---|
+| 무료 조회 재시도 모의 검사 | **19개 통과** — 정상 응답, 일시 오류 복구, 404 즉시 중단, 타임아웃, 종료 후 수동 재요청, 요청·대기 취소, 전체 시간 한도 |
+| ESLint · Vite 프로덕션 빌드 | 통과 |
+| 브라우저 모의 상황 | 초기·지연·오류 안내, 수동 복구, 경로 이동 시 진행 요청 취소 확인 |
+| 기존 Vercel 자동 배포 | `f111c2d` 커밋의 배포 성공 확인 |
+| 프로덕션 연결 | 프로그램 API 17개, Render `/health` 정상. 프로그램 목록·상세·포스터 표시 확인 |
+| 이번 연결 검증 중 실제 OpenAI 호출 | **0회**. AI 생성 POST 코드는 변경하지 않음 |
 
 ```powershell
 cd frontend
+node --test tests/loadPrograms.test.js
 npm run lint
 npm run build
-cd ..
-node scripts/verify_frontend.mjs
-backend/.venv/Scripts/python.exe -m pip install -r backend/requirements-dev.txt
-backend/.venv/Scripts/python.exe scripts/verify_backend.py
 ```
 
 - 브라우저에서 홈 그래프 전환, 데이터 팝업, 프로그램 검색 → 상세 이동, 영상 슬라이드, 트렌드 차트, 포스터 로드를 확인했고, 2026.10.17 배포 사이트에서 AI 리포트 생성이 검증을 통과해 표시되는 것을 확인했습니다.
 - **검증하지 않은 범위**: 모든 뷰포트의 픽셀 비교, 접근성 전수 감사, 외부 유튜브 영상의 실제 재생 가능성.
-- 원본 비교 검사는 로컬 보관본(`.local/refactor-original`)이 필요해 새 clone에서는 바로 실행할 수 없습니다. 자세한 내용은 [리팩터링 보고서](docs/REFACTOR_REPORT.md)를 참고하세요.
+- `scripts/verify_frontend.mjs`, `scripts/verify_backend.py`는 리팩터링 당시의 원본 동등성 검사입니다. 로컬 보관본(`.local/refactor-original`)이 필요하고 이후 의도적인 기능 변경으로 완전 일치 조건이 달라졌으므로, 현재 코드의 일반 회귀 검사로 사용하지 않습니다. 과거 기록은 [리팩터링 보고서](docs/REFACTOR_REPORT.md)를 참고하세요.
+- Render를 강제로 절전시키지는 않았습니다. 실패·타임아웃은 모의 응답으로 확인했고 실제 사이트에서는 연결과 데이터 표시를 확인했습니다.
 
 ---
 
@@ -394,6 +426,7 @@ backend/.venv/Scripts/python.exe scripts/verify_backend.py
 - **공개 배포 전 비용 보호** — 인증 없이 열려 있던 유료 API에 일일 한도와 중복 잠금을 추가했습니다.
 - **동작을 지킨 리팩터링** — 원본 비교로 기능 · 수치 · 디자인을 유지했습니다.
 - **한계를 드러내는 화면** — 검증 수준과 해석 범위를 숨기지 않고 표기했습니다.
+- **첫 방문 연결 안정화** — 절전 복구 동안 로딩 상태를 안내하고 무료 조회만 제한적으로 재시도합니다.
 
 **아쉬운 점 (Problem)**
 - 분석 기간이 2주라 추세보다는 변화 방향만 말할 수 있습니다.

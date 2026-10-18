@@ -236,7 +236,7 @@
     </div>
     <div class="card col" style="padding:16px 18px;">
       <div class="flow" style="flex:1;">
-        <div class="node card col" style="background:#fbf8f4;"><div class="k">Client</div><h3 class="mt4">브라우저</h3><p class="t14 mu mt8">해시 주소 <code>/#/program/MBN11</code><br />페이지 이동은 서버 요청 없이 처리</p><ul class="pts t13 mt12"><li>첫 로드에 프로그램 17개 1회 조회</li><li>상세 진입 시 영상·회차만 추가 조회</li><li>AI 생성은 버튼 클릭 때만</li></ul></div>
+        <div class="node card col" style="background:#fbf8f4;"><div class="k">Client</div><h3 class="mt4">브라우저</h3><p class="t14 mu mt8">해시 주소 <code>/#/program/MBN11</code><br />수신한 목록은 경로 이동에도 재사용</p><ul class="pts t13 mt8" style="gap:6px;"><li>무료 GET 최대 8회 · 전체 110초</li><li>간격 2→4→8→16초, 이후 24초</li><li>요청당 18초 · 성공·이동 시 중단</li><li>상세에서 영상 조회 · AI는 수동 POST</li></ul></div>
         <div class="arw">→</div>
         <div class="node card col" style="background:#fbf8f4;"><div class="k">Vercel</div><h3 class="mt4">React 정적 파일</h3><p class="t14 mu mt8"><code>vercel.json</code>의 rewrite로<br /><code>/api/*</code>만 Render에 전달</p><ul class="pts t13 mt12"><li>Vite 빌드 결과 <code>dist</code> 배포</li><li>포스터·폰트·로고는 <code>public/</code></li><li>링크 미리보기 OG 메타 설정</li></ul></div>
         <div class="arw">→</div>
@@ -252,7 +252,7 @@
     <div class="g" style="grid-template-columns: repeat(3,1fr);">
       <div class="card col"><h4>Render</h4><p class="t14 mu mt4">Root <code>backend</code> · Start <code>uvicorn main:app --host 0.0.0.0 --port $PORT</code> · Health <code>/health</code></p></div>
       <div class="card col"><h4>Vercel</h4><p class="t14 mu mt4">Root <code>frontend</code> · Build <code>npm run build</code> · Output <code>dist</code> · 해시 라우팅이라 페이지 rewrite 불필요</p></div>
-      <div class="card col"><h4>비밀 값</h4><p class="t14 mu mt4">OpenAI·Redis 키와 IP 해시 솔트는 Render 환경 변수에만 두고 프론트엔드에는 넣지 않습니다.</p></div>
+      <div class="card col"><h4>연결 안내 · 비밀 값</h4><p class="t14 mu mt4">초기·지연 상태를 안내하고 실패 시 수동 재요청을 제공합니다. AI POST는 자동 재시도하지 않습니다. 키·솔트는 서버에만 둡니다.</p></div>
     </div>
   </div>
   <div class="ft"><span><b>04</b> / 19</span><span>Tech Stack</span></div>
@@ -397,7 +397,7 @@
     <div class="flow">
       <div class="node card col"><div class="k">Step 1</div><h3 class="mt4">근거 계산</h3><p class="t14 mu mt8"><code>build_evidence()</code><br />주차 비교표, 영상 제목 단서, 주의 사항, 실행 가능 여부를 확정</p><ul class="pts t13 mt12"><li>주차별 검색·영상·유형 비중</li><li>영상 제목 단서 상위 목록</li><li><code>execution_allowed</code> 판단</li></ul></div>
       <div class="arw">→</div>
-      <div class="node card col"><div class="k">Step 2</div><h3 class="mt4">사용량 예약</h3><p class="t14 mu mt8">Redis Lua 한 번으로 확인·차감·잠금. IP는 HMAC-SHA256 해시로만 저장</p><ul class="pts t13 mt12"><li>개인 3회 · 전체 30회 / 일</li><li>동일 프로그램 120초 잠금</li><li>UTC 자정 기준 초기화</li></ul></div>
+      <div class="node card col"><div class="k">Step 2</div><h3 class="mt4">사용량 예약</h3><p class="t14 mu mt8">Redis Lua 한 번으로 확인·차감·잠금. IP는 HMAC-SHA256 해시로만 저장</p><ul class="pts t13 mt12"><li>개인 3회 · 전체 30회 / 일</li><li>같은 접속 환경·프로그램별 잠금</li><li>UTC 자정 기준 초기화</li></ul></div>
       <div class="arw">→</div>
       <div class="node card col hot"><div class="k">Step 3</div><h3 class="mt4">구조화 생성</h3><p class="t14 mu mt8">Responses API + JSON Schema strict. 근거만 입력, <code>store=False</code></p><ul class="pts t13 mt12"><li>모델 기본값 <code>gpt-5-mini</code></li><li>reasoning effort low</li><li>max output 4,600 토큰</li></ul></div>
       <div class="arw">→</div>
@@ -408,7 +408,7 @@
     <div class="g" style="grid-template-columns: repeat(4,1fr);">
       <div class="card col"><div class="stat ac">3<small>회</small></div><p class="t14 mu mt8">접속 환경별 하루 생성 한도</p></div>
       <div class="card col"><div class="stat ac">30<small>회</small></div><p class="t14 mu mt8">사이트 전체 하루 생성 한도</p></div>
-      <div class="card col"><div class="stat ac">120<small>초</small></div><p class="t14 mu mt8">같은 프로그램 중복 요청 잠금</p></div>
+      <div class="card col"><div class="stat ac">120<small>초</small></div><p class="t14 mu mt8">최대 120초 · 요청 종료 시 해제<br />같은 접속 환경·같은 프로그램</p></div>
       <div class="card col"><div class="stat ac">0<small>원</small></div><p class="t14 mu mt8">무료 미리보기 <code>/strategy-preview</code></p></div>
     </div>
     <div class="g" style="grid-template-columns: 1fr 1fr 1fr;">
@@ -462,25 +462,27 @@
   main.py                  <span class="c"># uvicorn main:app 진입점</span>
   app/
     config.py              <span class="c"># 데이터·환경 변수 경로</span>
-    routers/
-      programs.py          <span class="c"># 프로그램 목록·상세 조회</span>
-      ai.py                <span class="c"># 미리보기·전략 생성 API</span>
+    routers/               <span class="c"># programs.py · ai.py</span>
     services/
       strategy_evidence.py <span class="c"># 근거 계산</span>
       strategy_report.py   <span class="c"># 응답 검증·대체 보고서</span>
-      ai_rate_limit.py     <span class="c"># Redis 일일 한도</span>
+      ai_rate_limit.py     <span class="c"># Redis 일일 한도·잠금</span>
     schemas/strategy.py    <span class="c"># JSON 스키마·AI 지침</span>
   data/                    <span class="c"># *_v1.json 5종</span>
 <span class="k">frontend/</span>
   src/
-    App.jsx                <span class="c"># 데이터 로딩·해시 라우팅</span>
-    pages/                 <span class="c"># Home · TrendPage · ProgramList · ProgramDetail</span>
-    components/            <span class="c"># Charts · Strategy · VideosSection · DataModal</span>
+    App.jsx                <span class="c"># 데이터 상태·해시 경로 연결</span>
+    pages/                 <span class="c"># 홈 · 트렌드 · 목록 · 상세</span>
+    components/            <span class="c"># 차트 · 전략 · 영상 · ProgramLoadState</span>
+    hooks/useRoute.js      <span class="c"># 기존 해시 라우팅</span>
+    hooks/usePrograms.js   <span class="c"># 로딩 상태·성공 데이터 재사용</span>
     utils/programData.js   <span class="c"># 표시·정렬·계산 기준</span>
+    utils/loadPrograms.js  <span class="c"># 무료 GET 제한 재시도</span>
   public/                  <span class="c"># programs · fonts · brand</span>
   vercel.json              <span class="c"># /api rewrite</span>
-<span class="k">scripts/</span>                   <span class="c"># 회귀 검증</span>
-<span class="k">docs/</span>                      <span class="c"># 데이터 공개 검토 · 리팩터링 보고서</span></pre>
+  tests/loadPrograms.test.js <span class="c"># 연결·취소·복구 모의 검사</span>
+<span class="k">scripts/</span>                   <span class="c"># 리팩터링 당시 원본 비교</span>
+<span class="k">docs/</span>                      <span class="c"># 공개 검토 · 리팩터링 기록</span></pre>
     <div class="g h100" style="grid-template-rows: auto 1fr;">
 <pre><span class="c">// programs_v1.json — 프로그램 17개</span>
 {
@@ -557,39 +559,36 @@ curl 127.0.0.1:5173/api/v1/meta
 
 <!-- 18 검증 -->
 <div class="stage" id="s-verify" data-title="검증 결과"><section class="slide">
-  <div class="hd"><div class="eyebrow">Verification</div><h2>리팩터링 검증 결과</h2><p class="sub">1,106줄이던 App.jsx를 페이지·컴포넌트 단위로 나누면서, 화면과 응답이 바뀌지 않았는지 원본과 하나씩 비교했습니다.</p></div>
+  <div class="hd"><div class="eyebrow">Verification</div><h2>리팩터링 기록과 연결 안정화 검증</h2><p class="sub">2026.10.17의 원본 비교 기록과 10.18의 재시도 검증을 구분했습니다. 과거 완전 일치 수치는 당시 소스 기준입니다.</p></div>
   <div class="bd g" style="grid-template-columns: 1fr 520px;">
-    <div class="tbl">
-      <table>
-        <thead><tr><th>검사</th><th style="width:200px;">결과</th></tr></thead>
-        <tbody>
-          <tr><td>Python 문법 검사</td><td><b style="color:var(--good)">14개 파일 통과</b></td></tr>
-          <tr><td>조회 API · 404 응답 원본 비교</td><td><b style="color:var(--good)">77개 일치</b></td></tr>
-          <tr><td>17개 프로그램 AI 성공·대체 보고서 모의 비교</td><td><b style="color:var(--good)">34개 일치</b></td></tr>
-          <tr><td>AI 함수 AST · 지침 · JSON 스키마</td><td><b style="color:var(--good)">18개 동일</b></td></tr>
-          <tr><td>프론트 함수 본문 AST 비교</td><td><b style="color:var(--good)">43개 동일</b></td></tr>
-          <tr><td>페이지·상세·팝업·AI 보고서 HTML 비교</td><td><b style="color:var(--good)">41개 일치</b></td></tr>
-          <tr><td>데이터·이미지·폰트 SHA-256</td><td><b style="color:var(--good)">51개 동일</b></td></tr>
-          <tr><td>ESLint · Vite 프로덕션 빌드</td><td><b style="color:var(--good)">통과</b></td></tr>
-          <tr><td>검증 중 실제 OpenAI 호출</td><td><b>0회</b> (모의 처리)</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>2026.10.17 · 리팩터링 당시 검사</th><th style="width:200px;">결과</th></tr></thead>
+      <tbody>
+        <tr><td>Python 문법 검사</td><td><b style="color:var(--good)">14개 파일 통과</b></td></tr>
+        <tr><td>조회 API · 404 응답 원본 비교</td><td><b style="color:var(--good)">77개 일치</b></td></tr>
+        <tr><td>17개 프로그램 AI 성공·대체 보고서 모의 비교</td><td><b style="color:var(--good)">34개 일치</b></td></tr>
+        <tr><td>함수 AST · 지침 · 스키마 원본 비교</td><td><b style="color:var(--good)">AI 18 · 프론트 43 동일</b></td></tr>
+        <tr><td>페이지·상세·팝업·AI 보고서 HTML 비교</td><td><b style="color:var(--good)">41개 일치</b></td></tr>
+        <tr><td>데이터·이미지·폰트 SHA-256</td><td><b style="color:var(--good)">51개 동일</b></td></tr>
+        <tr><th>2026.10.18 · 첫 방문 연결 개선</th><th>결과</th></tr>
+        <tr><td>정상·일시 실패·404·타임아웃·취소·수동 복구</td><td><b style="color:var(--good)">모의 검사 19개 통과</b></td></tr>
+        <tr><td>ESLint · Vite 빌드 · 기존 Vercel 자동 배포</td><td><b style="color:var(--good)">통과 · 배포 성공</b></td></tr>
+        <tr><td>실제 API 연결 · 목록·상세·포스터 표시</td><td><b style="color:var(--good)">17개 · health 정상</b></td></tr>
+      </tbody>
+    </table></div>
     <div class="g h100" style="grid-template-rows: 112px auto 1fr;">
       <div class="g" style="grid-template-columns: 1fr 1fr; gap:14px;">
-        <div class="card col"><div class="stat ac">1,106</div><p class="t13 mu mt8">분리 전 App.jsx 줄 수</p></div>
-        <div class="card col"><div class="stat ac">39</div><p class="t13 mu mt8">분리 후 App.jsx 줄 수</p></div>
+        <div class="card col"><div class="stat ac">39</div><p class="t13 mu mt8">리팩터링 직후 App.jsx · 10/17</p></div>
+        <div class="card col"><div class="stat ac">29</div><p class="t13 mu mt8">조회 훅 분리 후 App.jsx · 10/18</p></div>
       </div>
 <pre>cd frontend
+node --test tests/loadPrograms.test.js
 npm run lint
-npm run build
-cd ..
-node scripts/verify_frontend.mjs
-python scripts/verify_backend.py</pre>
-      <div class="card col"><div class="lbl">검증하지 않은 범위</div><p class="t14 mt8">모든 뷰포트의 픽셀 비교, 접근성 전수 감사, 외부 유튜브 영상 재생 가능성은 확인하지 않았습니다.</p><p class="t14 mu mt8">원본 비교 스크립트는 로컬 보관본(<code>.local/</code>)이 필요해 새 clone에서는 바로 실행할 수 없습니다.</p><div class="lbl mt12">브라우저에서 직접 확인한 항목</div><ul class="pts t14 mt8"><li>홈 그래프 전환 · 데이터 팝업 · 검색 → 상세 이동 · 영상 슬라이드</li><li>트렌드 차트 · 포스터 로드 · 배포 사이트 AI 리포트 생성(10/17)</li></ul></div>
+npm run build</pre>
+      <div class="card col"><div class="lbl">검증 범위와 한계</div><p class="t14 mt8">이번 연결 검증의 OpenAI 실호출은 <b>0회</b>입니다. 유료 POST는 변경하지 않았고, Render 강제 절전 없이 실패 응답을 모의했습니다.</p><p class="t14 mu mt8">과거 원본 비교 스크립트는 당시 소스와 로컬 보관본 기준입니다. 현재 기능 변경 후 일반 회귀 검사로 사용하지 않습니다.</p><div class="lbl mt12">브라우저에서 확인 · 10/18</div><p class="t14 mt8">초기·지연·오류 안내, 수동 복구, 경로 이동 시 요청 취소, 프로그램 17개 표시를 확인했습니다.</p><p class="t13 mu mt8">픽셀 전수 비교·접근성 감사·외부 영상 재생은 검증 범위에 포함하지 않았습니다.</p></div>
     </div>
   </div>
-  <div class="ft"><span><b>18</b> / 19</span><span>Verification · docs/REFACTOR_REPORT.md</span></div>
+  <div class="ft"><span><b>18</b> / 19</span><span>Verification · 2026.10.17 / 2026.10.18</span></div>
 </section></div>
 
 <!-- 19 회고 -->
@@ -604,7 +603,7 @@ python scripts/verify_backend.py</pre>
         <li><b>공개 배포 전 비용 보호</b><br /><span class="mu">인증 없이 열려 있던 유료 API에 일일 한도와 중복 잠금을 추가했습니다.</span></li>
         <li><b>동작을 지킨 리팩터링</b><br /><span class="mu">원본 비교로 기능·수치·디자인을 유지했습니다.</span></li>
         <li><b>한계를 드러내는 화면</b><br /><span class="mu">검증 수준과 해석 범위를 숨기지 않고 표기했습니다.</span></li>
-        <li><b>배포 환경에서 실제 생성 확인</b><br /><span class="mu">공개 사이트에서 리포트가 검증을 통과해 표시됐습니다.</span></li>
+        <li><b>첫 방문 연결 안정화</b><br /><span class="mu">절전 복구 중 안내와 무료 GET 재시도를 추가했습니다.</span></li>
       </ul>
     </div>
     <div class="card col">
@@ -633,9 +632,9 @@ python scripts/verify_backend.py</pre>
       <div class="node"><div class="k">01</div><p class="t14 mt4"><b>데이터 정리</b><br /><span class="mu">17개 프로그램 · 영상 303 · JSON 5종</span></p></div><div class="arw">→</div>
       <div class="node"><div class="k">02</div><p class="t14 mt4"><b>대시보드 구현</b><br /><span class="mu">홈 · 화제성 · 목록 · 상세</span></p></div><div class="arw">→</div>
       <div class="node"><div class="k">03</div><p class="t14 mt4"><b>AI 전략 리포트</b><br /><span class="mu">근거 계산 · 스키마 · 검증</span></p></div><div class="arw">→</div>
-      <div class="node"><div class="k">04</div><p class="t14 mt4"><b>리팩터링</b><br /><span class="mu">App.jsx 1,106 → 39줄</span></p></div><div class="arw">→</div>
+      <div class="node"><div class="k">04</div><p class="t14 mt4"><b>리팩터링</b><br /><span class="mu">당시 App.jsx 1,106 → 39줄</span></p></div><div class="arw">→</div>
       <div class="node"><div class="k">05</div><p class="t14 mt4"><b>배포</b><br /><span class="mu">Vercel · Render · rewrite</span></p></div><div class="arw">→</div>
-      <div class="node"><div class="k">06</div><p class="t14 mt4"><b>비용 보호</b><br /><span class="mu">Redis 일일 한도 · 잠금</span></p></div>
+      <div class="node"><div class="k">06</div><p class="t14 mt4"><b>비용·연결 보호</b><br /><span class="mu">Redis 한도 · GET 재시도</span></p></div>
     </div>
   </div>
   </div>

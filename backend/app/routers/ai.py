@@ -15,7 +15,7 @@ from openai import (
 )
 
 from app.schemas.strategy import INSTRUCTIONS, STRATEGY_SCHEMA
-from app.services.ai_rate_limit import reserve, release
+from app.services.ai_rate_limit import USER_DAILY_LIMIT, SITE_DAILY_LIMIT, reserve, release
 from app.services.strategy_evidence import _program_index, build_evidence
 from app.services.strategy_report import (
     _local_fallback,
@@ -30,12 +30,16 @@ DIAGNOSTIC_VERSION = "strategy-quality-v3.1-20261017"
 
 @router.get("/status")
 def status():
-    """설정 여부와 진단 버전을 반환하며 외부 API는 호출하지 않는다."""
+    """설정 여부·진단 버전·일일 한도를 반환하며 외부 API는 호출하지 않는다."""
     return {
         "configured": bool(os.getenv("OPENAI_API_KEY")),
         "model": os.getenv("OPENAI_MODEL", "gpt-5-mini"),
         "api_called": False,
         "diagnostic_version": DIAGNOSTIC_VERSION,
+        "daily_limits": {
+            "per_client": USER_DAILY_LIMIT,
+            "site_total": SITE_DAILY_LIMIT,
+        },
     }
 
 

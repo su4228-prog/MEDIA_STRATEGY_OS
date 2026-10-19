@@ -16,6 +16,9 @@ from urllib.request import Request, urlopen
 
 from fastapi import HTTPException, Request as FastAPIRequest
 
+USER_DAILY_LIMIT = 10
+SITE_DAILY_LIMIT = 30
+
 
 # 확인 -> 제한 -> 할당 -> 잠금을 하나의 Redis 연산으로 처리한다.
 _RESERVE_LUA = """
@@ -92,9 +95,9 @@ def _client_id(request: FastAPIRequest):
 
 
 def reserve(request: FastAPIRequest, program_id: str):
-    """UTC 날짜별 개인 3회/전체 30회 제한과 중복 잠금을 원자적으로 예약한다.
+    """UTC 날짜별 개인 10회/전체 30회 제한과 중복 잠금을 원자적으로 예약한다.
 
-    성공한 예약은 API 오류가 발생해도 사용량에서 차감하지 않는다. API 비용이
+    성공한 예약은 API 오류가 발생해도 사용량을 되돌리지 않는다. API 비용이
     발생한 뒤 응답이 실패할 수 있으므로, 과금 방지 목적의 보수적 계산이다.
     """
     now = datetime.now(timezone.utc)
@@ -106,13 +109,16 @@ def reserve(request: FastAPIRequest, program_id: str):
     all_key = f'{prefix}:all:{day}'
     lock_key = f'{prefix}:lock:{hashed}:{program_id}'
     token = secrets.token_urlsafe(24)
-    outcome = _redis_command('EVAL', _RESERVE_LUA, 3, user_key, all_key, lock_key, token, 3, 30, ttl, 120)
+    outcome = _redis_command(
+        'EVAL', _RESERVE_LUA, 3, user_key, all_key, lock_key, token,
+        USER_DAILY_LIMIT, SITE_DAILY_LIMIT, ttl, 120,
+    )
     try:
         code = int(outcome)
     except (ValueError, TypeError) as exc:
         raise HTTPException(status_code=503, detail='AI 사용량 보호 응답을 확인할 수 없습니다.') from exc
     errors = {
-        1: '오늘 이 접속 환경에서 생성할 수 있는 AI 보고서 3회를 모두 사용했습니다.',
+        1: f'오늘 이 접속 환경에서 생성할 수 있는 AI 보고서 {USER_DAILY_LIMIT}회를 모두 사용했습니다.',
         2: '오늘 사이트 전체 AI 보고서 생성 한도에 도달했습니다. 내일 다시 이용해 주세요.',
         3: '같은 프로그램의 AI 보고서가 이미 생성 중입니다. 잠시 후 다시 확인해 주세요.',
     }

@@ -397,7 +397,7 @@
     <div class="flow">
       <div class="node card col"><div class="k">Step 1</div><h3 class="mt4">근거 계산</h3><p class="t14 mu mt8"><code>build_evidence()</code><br />주차 비교표, 영상 제목 단서, 주의 사항, 실행 가능 여부를 확정</p><ul class="pts t13 mt12"><li>주차별 검색·영상·유형 비중</li><li>영상 제목 단서 상위 목록</li><li><code>execution_allowed</code> 판단</li></ul></div>
       <div class="arw">→</div>
-      <div class="node card col"><div class="k">Step 2</div><h3 class="mt4">사용량 예약</h3><p class="t14 mu mt8">Redis Lua 한 번으로 확인·차감·잠금. IP는 HMAC-SHA256 해시로만 저장</p><ul class="pts t13 mt12"><li>개인 3회 · 전체 30회 / 일</li><li>같은 접속 환경·프로그램별 잠금</li><li>UTC 자정 기준 초기화</li></ul></div>
+      <div class="node card col"><div class="k">Step 2</div><h3 class="mt4">사용량 예약</h3><p class="t14 mu mt8">Redis Lua 한 번으로 확인·차감·잠금. IP는 HMAC-SHA256 해시로만 저장</p><ul class="pts t13 mt12"><li>개인 10회 · 전체 30회 / 일</li><li>같은 접속 환경·프로그램별 잠금</li><li>UTC 자정 기준 초기화</li></ul></div>
       <div class="arw">→</div>
       <div class="node card col hot"><div class="k">Step 3</div><h3 class="mt4">구조화 생성</h3><p class="t14 mu mt8">Responses API + JSON Schema strict. 근거만 입력, <code>store=False</code></p><ul class="pts t13 mt12"><li>모델 기본값 <code>gpt-5-mini</code></li><li>reasoning effort low</li><li>max output 4,600 토큰</li></ul></div>
       <div class="arw">→</div>
@@ -406,7 +406,7 @@
       <div class="node card col"><div class="k">Step 5</div><h3 class="mt4">보고서 반환</h3><p class="t14 mu mt8"><code>openai_validated</code> 또는 <code>verified_evidence_fallback</code> + <code>STRATEGY_REVIEW_ONLY</code></p><ul class="pts t13 mt12"><li>헤드라인·인사이트·기회</li><li>실험 설계·최종 제안</li><li>데이터 처리 기준(한계)</li></ul></div>
     </div>
     <div class="g" style="grid-template-columns: repeat(4,1fr);">
-      <div class="card col"><div class="stat ac">3<small>회</small></div><p class="t14 mu mt8">접속 환경별 하루 생성 한도</p></div>
+      <div class="card col"><div class="stat ac">10<small>회</small></div><p class="t14 mu mt8">접속 환경별 하루 생성 한도</p></div>
       <div class="card col"><div class="stat ac">30<small>회</small></div><p class="t14 mu mt8">사이트 전체 하루 생성 한도</p></div>
       <div class="card col"><div class="stat ac">120<small>초</small></div><p class="t14 mu mt8">최대 120초 · 요청 종료 시 해제<br />같은 접속 환경·같은 프로그램</p></div>
       <div class="card col"><div class="stat ac">0<small>원</small></div><p class="t14 mu mt8">무료 미리보기 <code>/strategy-preview</code></p></div>

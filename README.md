@@ -93,6 +93,7 @@
 | GET | `/api/v1/programs` · `/api/v1/programs/{id}` | 프로그램 목록 · 상세 |
 | GET | `/api/v1/programs/{id}/videos` · `/episodes` | 관련 영상 후보 · 방송 회차 |
 | GET | `/api/v1/meta` | 집계 개수 · 원본 출처 정보 |
+| GET | `/api/v1/ai/status` | 설정 여부·진단 버전·현재 일일 한도 (외부 호출 없음) |
 | GET | `/api/v1/ai/strategy-preview/{id}` | 근거 미리보기 (외부 호출 없음, 무료) |
 | POST | `/api/v1/ai/strategy/{id}` | AI 전략 리포트 생성 (유료, 일일 한도 적용) |
 
@@ -205,13 +206,13 @@ Render 무료 서버가 절전에서 복구되는 동안 빈 데이터나 잘못
 ```text
 ① 근거 계산         ② 사용량 예약          ③ 구조화 생성          ④ 응답 검증              ⑤ 보고서 반환
 build_evidence() → Redis Lua 원자 처리 → JSON Schema strict → 근거에 없는 수치 검사 → openai_validated
-주차 비교표          개인 3회·전체 30회/일    근거만 입력            실패 시 재호출 없이      또는 verified_evidence_fallback
+주차 비교표          개인 10회·전체 30회/일   근거만 입력            실패 시 재호출 없이      또는 verified_evidence_fallback
 제목 단서·주의 사항  최대 120초 중복 잠금    store=False           대체 보고서              + STRATEGY_REVIEW_ONLY
 ```
 
 | 보호 장치 | 내용 |
 |---|---|
-| **일일 한도** | 접속 환경(IP 해시)별 3회 · 사이트 전체 30회, UTC 자정 기준 초기화 |
+| **일일 한도** | 접속 환경(IP 해시)별 10회 · 사이트 전체 30회, UTC 자정 기준 초기화. 2026.10.19에 개인 한도만 3회에서 10회로 상향 |
 | **중복 잠금** | 같은 접속 환경(IP 해시)·같은 프로그램의 동시 요청을 차단. 최대 120초이며 요청 종료 시 자신의 잠금을 해제 |
 | **개인정보** | IP 원문은 저장하지 않고 `MSOS_RATE_LIMIT_SALT`로 HMAC-SHA256 해시만 보관 |
 | **보수적 차감** | 예약에 성공하면 이후 API 오류가 나도 횟수를 돌려주지 않음 (비용이 이미 발생했을 수 있음) |
@@ -416,6 +417,19 @@ npm run build
 - **검증하지 않은 범위**: 모든 뷰포트의 픽셀 비교, 접근성 전수 감사, 외부 유튜브 영상의 실제 재생 가능성.
 - `scripts/verify_frontend.mjs`, `scripts/verify_backend.py`는 리팩터링 당시의 원본 동등성 검사입니다. 로컬 보관본(`.local/refactor-original`)이 필요하고 이후 의도적인 기능 변경으로 완전 일치 조건이 달라졌으므로, 현재 코드의 일반 회귀 검사로 사용하지 않습니다. 과거 기록은 [리팩터링 보고서](docs/REFACTOR_REPORT.md)를 참고하세요.
 - Render를 강제로 절전시키지는 않았습니다. 실패·타임아웃은 모의 응답으로 확인했고 실제 사이트에서는 연결과 데이터 표시를 확인했습니다.
+
+### AI 일일 한도 조정 — 2026.10.19
+
+접속 환경별 한도를 **3회에서 10회**로 늘렸습니다. 사이트 전체 **30회**, UTC 자정 초기화, 기존 카운터 키, 최대 120초 중복 잠금, 장애 시 유료 호출 차단은 유지합니다. 이미 사용한 횟수를 초기화하지 않으며, 오류가 난 예약도 되돌리지 않습니다.
+
+외부 Redis·OpenAI를 호출하지 않는 모의 검사 **6개**로 새 한도 전달, 10번째 허용·11번째 차단, 기존 사용량 재사용, 전체 한도·중복 잠금·Redis 장애 차단, 차단된 요청의 OpenAI 호출 방지와 무료 상태 응답을 확인했습니다.
+
+```powershell
+cd backend
+./.venv/Scripts/python.exe -m unittest discover -s tests -v
+```
+
+무료 `GET /api/v1/ai/status`의 `daily_limits`는 `per_client: 10`, `site_total: 30`을 반환합니다. 유료 보고서를 생성하지 않고도 현재 배포된 한도를 확인할 수 있습니다.
 
 ---
 
